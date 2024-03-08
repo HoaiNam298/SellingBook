@@ -1,0 +1,226 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/home/layout :: dynamic (~{::main})}">
+
+<!-- BEGIN MAIN -->
+<main class="main">
+	
+
+	<!-- BEGIN PRODUCT CARD -->
+	<section class="product wrapper">
+		<div class="product__cols">
+			<!-- BEGIN LEFT COLUMN -->
+			<div class="product__left">
+				<div class="product__mob js-to-3"></div>
+				<div class="product-gallery">
+					<div class="product-gallery__top">
+						<div class="product-gallery__cols">
+							<div class="product-gallery__col">
+								<div class="product-gallery__tag">
+									<span class="item-tag item-tag_red">
+										<th:block th:text="#{user.sale}"></th:block>
+									</span>
+								</div>
+								<div class="product-gallery__tag">
+									<span class="item-tag item-tag_green"> 
+										<th:block th:text="#{user.newp}"></th:block>
+									</span>
+								</div>
+							</div>
+							<div class="product-gallery__col">
+								<button class="favorite-button js-toggle-active"></button>
+							</div>
+						</div>
+					</div>
+					<div class="product-slider loaded js-product-slider dots-2 dots-left">
+						<div class="product-slider__item">
+								<div id="myCarousel" class="carousel slide" data-ride="carousel">
+									<!-- Indicators -->
+									<ol class="carousel-indicators">
+										<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+										<li data-target="#myCarousel" data-slide-to="1"></li>
+										<li data-target="#myCarousel" data-slide-to="2"></li>
+									</ol>
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										<div class="item active">
+											<a class="product-slider__link"
+												 th:href="@{|/assets/products/${item.anh}|}" data-fancybox="gallery">
+												<img class="product-slider__image"
+													 th:src="@{|/assets/products/${item.anh}|}" style="height: 100%;">
+											</a>
+										</div>
+
+										<div class="item">
+											<a class="product-slider__link"
+												th:href="@{|/assets/products/${item.anh1}|}" data-fancybox="gallery">
+												<img class="product-slider__image"
+													th:src="@{|/assets/products/${item.anh1}|}" style="height: 100%;">
+											</a>
+										</div>
+
+										<div class="item">
+											<a class="product-slider__link"
+												th:href="@{|/assets/products/${item.anh2}|}" data-fancybox="gallery">
+												<img class="product-slider__image"
+													th:src="@{|/assets/products/${item.anh2}|}" style="height: 100%;">
+											</a>
+										</div>
+									</div>
+
+									<!-- Left and right controls -->
+									<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="right carousel-control" href="#myCarousel" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+										<span class="sr-only">Next</span>
+									</a>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+			<!-- LEFT COLUMN END -->
+
+			<!-- BEGIN RIGHT COLUMN -->
+			<div class="product__right">
+				<div class="product__content">
+					<div class="product__desktop js-from-3">
+						<div class="product__top js-content-3">
+							<h2 class="product__title">[[${item.ten}]]</h2>
+							<div class="product-rating">
+								<div class="product-rating__col">
+									<div class="product-rating__stars rating rating_medium">
+										<input class="star" name="product-rating" type="radio" disabled>
+										<input class="star" name="product-rating" type="radio" disabled>
+										<input class="star" name="product-rating" type="radio" disabled>
+										<input class="star" name="product-rating" type="radio" disabled>
+										<input class="star" name="product-rating" type="radio" checked disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="product__text ">Mô Tả: [[${item.mota}]]</p>
+					<ul class="chars">
+						<li class="chars__item">
+							<span class="chars__name"> 
+								<th:block th:text="#{user.category}"></th:block>
+								:
+							</span>
+							<span class="chars__text">[[${item.theloai.tentheloai}]]</span>
+						</li>
+						
+					</ul>
+					<div class="product__prices">
+						<span class="product__price">
+							[[${#numbers.formatDecimal(item.gia, 2, 0)}]] ₫
+						</span>
+					</div>
+				</div>
+				<div class="product-add">
+				    <div class="product-add__col">
+				        <a th:attr="ng-click=@{|cart.add('${item.id_sp}')|}" th:href="@{|/cart|}" class="product-add__button button">
+				            <span class="button__text">
+				                <th:block th:text="#{user.addcart}"></th:block>
+				            </span>
+				        </a>
+				    </div>
+				</div>
+			</div>
+			<!-- RIGHT COLUMN END -->
+		</div>
+	</section>
+	<!-- PRODUCT CARD END -->
+
+	<!-- BEGIN PRODUCT TABS -->
+	<div class="product-tabs wrapper">
+		<div class="product-nav tabs-nav js-line">
+			<ul class="product-nav__list tabs-nav__list tabs-nav__list_left">
+				<li class="tabs-nav__item js-line-item js-tabs-item active">
+					<a class="tabs-nav__link js-line-link js-tabs-link" href="#product-tab-2">
+						<th:block th:text="#{user.reviews}"></th:block>
+					</a>
+				</li>
+			</ul>
+			<div class="tabs-nav__line js-line-element"></div>
+		</div>
+		<!-- BEGIN REVIEWS -->
+		<div class="product-tab js-tabs-content active" id="product-tab-2">
+			<div class="product-tab__cols">
+				<!-- BEGIN REVIEWS -->
+				<div class="product-tab__left">
+					<div class="reviews">
+						<article class="review" th:each="comment : ${comment}">
+							<div class="review__top">
+								<div class="review__left">
+									<div class="review__cols">
+										<div class="review__col">
+											<h5 class="review__author">[[${comment.taikhoan.hovaten}]]</h5>
+										</div>
+										<div class="review__col">
+											<span class="review__date">Oct 15, 2023</span>
+										</div>
+										<div class="review__col">
+											<div class="review__rating rating rating_small">
+												<!-- <div>
+												    <input class="star" name="review-rating-1" type="radio" checked>
+												    <input class="star" name="review-rating-1" type="radio" disabled>
+													<input class="star" name="review-rating-1" type="radio" disabled>
+													<input class="star" name="review-rating-1" type="radio" disabled>
+													<input class="star" name="review-rating-1" type="radio" disabled>
+												</div> -->
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="review__right">
+									<a class="review__button reply-button"></a>
+								</div>
+							</div>
+							<p class="review__text">[[${comment.binhluan}]]</p>
+						</article>
+					</div>
+				</div>
+				<!-- REVIEWS END -->
+
+				<!-- BEGIN ADD REVIEW -->
+				<div class="product-tab__right">
+					<form name="myForm">
+						<section class="add-review">
+							<div class="add-review__top">
+								<h3 class="add-review__title"> 
+									<th:block th:text="#{user.reviewstitle}"></th:block>
+								</h3>
+								<p class="add-review__text"> 
+									<th:block th:text="#{user.reviewstext}"></th:block>
+								</p>
+								<div class="add-review__rating rating">
+									<input class="star" name="add-review-rating" type="radio">
+									<input class="star" name="add-review-rating" type="radio">
+									<input class="star" name="add-review-rating" type="radio">
+									<input class="star" name="add-review-rating" type="radio">
+									<input class="star" name="add-review-rating" type="radio">
+								</div>
+							</div>
+							<p class="text-input" id="id_sp" th:value="${item.id_sp}"></p>
+							<p class="text-input" id="email" th:value="${request.getRemoteUser}"></p>
+							<textarea class="textarea" th:placeholder="#{user.feedbackph}" id="binhluan" ng-model="binhluan" ng-required="true"></textarea>
+							<!-- <input class="text-input" type="text" th:placeholder="#{user.fnameph}"> -->
+							<button class="add-review__button button" ng-click="comment()" ng-disabled="myForm.$invalid" >
+								<span class="button__text"> 
+									<th:block th:text="#{user.reviewspost}"></th:block>
+								</span>
+							</button>
+						</section>
+					</form>
+				</div>
+				<!-- ADD REVIEW END -->
+			</div>
+		</div>
+		<!-- REVIEWS END -->
+	</div>
+	<!-- PRODUCT TABS END -->
+</main>
+</div>

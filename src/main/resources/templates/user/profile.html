@@ -1,0 +1,36 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/home/layout :: dynamic (~{::main})}">
+<title>
+ 	<th:block th:text="#{user.profile1}"></th:block>
+ 	 | Book Co., Ltd
+</title>
+<!-- BEGIN MAIN -->
+<main class="main">
+    
+
+    <!-- BEGIN PROFILE -->
+    <div class="profile-page wrapper">
+        <div class="login-form" style="max-width:100%">
+			<div class="login-form__top">
+			    <h2 class="login-form__title"> <th:block th:text="#{user.profiletitle}"></th:block></h2>
+				<p class="login-form__text"><th:block th:text="#{user.profiletext}"></th:block></p>
+			</div>
+			<form action="profile/update" method="post" enctype="multipart/form-data">
+				<span class="login-form__label"><th:block th:text="#{user.image}"></th:block></span>
+				<input class="text-input" type="file" name="img" value="${item.img}">
+				<span class="login-form__label"> <th:block th:text="#{user.username}"></th:block></span>
+				<input class="text-input" type="text" name="username" value="${item.username}" disabled>
+				<span class="login-form__label"> <th:block th:text="#{user.fullname}"></th:block></span>
+				<input class="text-input" type="text" name="fullname" value="${item.fullname}" required>
+				<span class="login-form__label"> <th:block th:text="#{user.email}"></th:block></span>
+				<input class="text-input" type="email" name="email" value="${item.email}" required>
+				<span class="login-form__label"> <th:block th:text="#{user.password}"></th:block></span>
+				<input class="text-input" type="password" name="password" value="${item.password}" required>
+				<button class="login-form__button button" type="submit">
+				    <span class="button__text">Update</span>
+				</button>
+			</form>
+		</div>
+    </div>
+    <!-- PROFILE END -->
+</main>
+<!-- MAIN END -->

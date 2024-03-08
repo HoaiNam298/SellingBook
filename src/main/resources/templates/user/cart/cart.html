@@ -1,0 +1,166 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/home/layout :: dynamic (~{::main})}">
+
+<!-- BEGIN MAIN -->
+<main class="main">
+	<!-- BEGIN CART -->
+	<div class="cart-page wrapper">
+		<div class="cart-page__cols">
+			<!-- BEGIN LEFT COLUMN -->
+			<div class="cart-page__left">
+				<div class="cart-table wishlist">
+					<th:block th:with="total=0"></th:block>
+						<form ng-repeat="item in cart.items">
+							<input type="hidden" name="id" value="${item.id}">
+							<article class="wishlist__item js-remove">
+                                <div class="wishlist__cols">
+                                    <div class="wishlist__left">
+                                        <a class="wishlist__image-link" th:href="@{|/detail/{{item.id_sp}}|}">
+                                            <img class="wishlist__image" th:src="@{|/assets/products/{{item.anh}}|}">
+                                        </a>
+                                    </div>
+                                    <div class="wishlist__right">
+                                        <div class="wishlist__top wishlist__top_cart">
+                                            <div class="wishlist__col">
+                                                <h2 class="wishlist__title">
+                                                    <a class="wishlist__link" th:href="@{|/detail/{{item.id_sp}}|}">{{item.ten}}</a>
+                                                </h2>
+                                            </div>
+                                            <div class="wishlist__col">
+                                                <button ng-click="cart.remove(item.id_sp)" class="wishlist__remove js-remove-button">X</button>  
+                                            </div>                                    
+                                        </div>
+                                        <div class="wishlist__bottom wishlist__bottom_cart">
+                                            <div class="wishlist__cart-col">
+                                                <span class="wishlist__old-price">500.000 ₫</span>
+                                                <span class="wishlist__price wishlist__price_small">{{item.gia | number : 0}} ₫</span> 
+                                                
+                                            </div>
+                                            <div class="wishlist__cart-col">
+                                                <div class="wishlist__count count js-count">
+                                                    <input ng-change="cart.saveToLocalStorage()" ng-model="item.soluongsp" type="number" min="1" step="1" max="50" 
+															style="width: 60px;" />
+                                                </div>                                    
+                                            </div> 
+                                            <div class="wishlist__cart-col">
+                                                <span class="wishlist__price wishlist__price_total">
+                                                	<th:block th:text="#{user.subtotal}"></th:block>
+                                                	:
+                                                	{{cart.amt_of(item) | number : 0}} ₫
+                                                </span>
+                                            </div>                                                                      
+                                        </div>
+                                    </div>   
+                                </div>                                                                 
+                            </article>
+						</form>
+					
+					<div ng-if="cart.amount <= 0" class="cart-page__left">
+					    <div class="cart-table wishlist" style="border-bottom: 0; text-align: center; margin: 50px 0">
+					        <h2 th:text="#{user.emptycart}">Empty Cart</h2>
+					    </div>
+					</div>
+					<div style="padding-top: 5px">
+						<button ng-click="cart.clear()" type="button" data-toggle="modal"> 
+							<th:block th:text="#{user.cleartext}"></th:block>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- LEFT COLUMN END -->
+
+			<!-- BEGIN RIGHT COLUMN -->
+			<aside class="cart-page__right">
+				<section class="your-order">
+					<h3 class="your-order__title"> 
+						<th:block th:text="#{user.yourorder}"></th:block>
+					</h3>
+					<ul class="your-order__list">
+						<li class="your-order__item">
+							<div class="your-order__col">
+								<span class="your-order__text"> 
+									<th:block th:text="#{user.subtotal}"></th:block>
+								</span>
+							</div>
+							<div class="your-order__col">
+								<span class="your-order__price">
+									{{cart.amount | number : 0}} ₫
+								</span>
+							</div>
+						</li>
+						<li class="your-order__item">
+							<div class="your-order__col">
+								<span class="your-order__text"> 
+									<th:block th:text="#{user.promotext}"></th:block>
+								</span>
+							</div>
+							<div class="your-order__col">
+								<span class="your-order__text"> 
+									<th:block th:text="#{user.no}"></th:block>
+								</span>
+							</div>
+						</li>
+						<li class="your-order__item">
+							<div class="your-order__col">
+								<span class="your-order__text"> 
+									<th:block th:text="#{user.transport}"></th:block>
+								</span>
+							</div>
+							<div class="your-order__col">
+								<span class="your-order__price">0 ₫</span>
+							</div>
+						</li>
+					</ul>
+					<div class="your-order__bottom">
+						<div class="your-order__col">
+							<span class="your-order__bottom-text"> 
+								<th:block th:text="#{user.total}"></th:block>
+							</span>
+						</div>
+						<div class="your-order__col">
+							<span class="your-order__bottom-price">
+								{{cart.amount | number : 0}} ₫
+							</span>
+						</div>
+					</div>
+					<a ng-if="cart.amount > 0" th:href="@{|/order/view|}" class="your-order__button button">
+					    <span class="button__text"> 
+					        <th:block th:text="#{user.checkout}"></th:block>
+					    </span>
+					</a>
+
+				</section>
+			</aside>
+			<!-- RIGHT COLUMN END -->
+		</div>
+		<!-- REMOVE ALL -->
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deleteLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" style="padding: 0" id="deleteLabel"> 
+							<th:block th:text="#{admin.deletesure}"></th:block>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"> 
+						<th:block th:text="#{user.clearcart}"></th:block>
+					</div>
+					<div class="modal-footer">
+						<a href="cart/clear" class="btn btn-yes text-white"> 
+							<th:block th:text="#{admin.deleteyes}"></th:block>
+						</a>
+						<a class="btn btn-no text-white" data-dismiss="modal">
+							<th:block th:text="#{admin.deleteno}"></th:block>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- CART END -->
+</main>
+<!-- MAIN END -->
+</div>

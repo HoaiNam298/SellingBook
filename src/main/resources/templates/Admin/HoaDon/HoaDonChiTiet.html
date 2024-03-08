@@ -1,0 +1,138 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/Admin/Layout/Layout :: dynamic (~{::main})}">
+    <!-- Main Content -->
+    <main id="content">
+
+        <!-- Topbar -->
+        <div th:replace="~{/Admin/Layout/TopBar}"></div>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Hóa đơn</h1>
+
+            
+             <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bảng dữ liệu</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                        	
+                                            <th>ID hóa đơn</th>
+                                            <th>Ngày tạo hóa đơn</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Email</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            
+
+                                        </tr>
+                                    </thead>
+                                   <tfoot>
+                                       <!--  <tr>
+                                        	
+                                            <th>ID hóa đơn</th>
+                                            <th>Ngày tạo hóa đơn</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Email</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            
+
+                                        </tr> -->
+                                    </tfoot>
+                                    <tbody>
+
+                                        <tr th:each="HDCTService : ${HDCTService}">
+                                            <td>[[${HDCTService.hoadon.id_hd}]]</td>
+                                            <td>[[${HDCTService.hoadon.ngaytaohoadon}]]</td>
+                                            <td>[[${HDCTService.hoadon.diachi}]]</td>
+                                            <td>[[${HDCTService.hoadon.taikhoan.email}]]</td>
+                                            <td>[[${HDCTService.sanpham.ten}]]</td>
+                                            <td>[[${#numbers.formatDecimal(HDCTService.gia,2,0)}]]</td>
+                                            <td>[[${HDCTService.soluong}]]</td>
+                                            <!-- <td name="tongtien">[[${#numbers.formatDecimal(HDCTService.gia,2,0)}]]</td> -->
+                                            <td name="tongtien">[[${HDCTService.gia * HDCTService.soluong}]]</td>
+                                            
+<!--                                            <td name="tongtien">[[${#numbers.formatDecimal(HDCTService.soluong * HDCTService.gia ,2,0)}]] </td>
+-->                                            <!-- <td>
+                                                <a class="text-white bg-danger"
+                                                    th:href="@{|/Admin/HoaDonChiTiet/Delete/${HDCTService.id_hdct}|}">Xóa</a>
+                                                <a class="text-white  bg-info"
+                                                    th:href="@{|/Admin/HoaDonChiTiet/Edit/${HDCTService.id_hdct}|}" >Sửa</a>
+                                            </td> -->
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+
+            
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </main>
+    <!-- End of Main Content -->
+</div>
+<script>	
+	// Lấy tất cả các thẻ có thuộc tính name="tongtien"
+	var tongTienElements = document.querySelectorAll('[name="tongtien"]');
+	// Duyệt qua từng thẻ và xử lý
+	tongTienElements.forEach(function(tongTienElement) {
+	  var tongTienValue = tongTienElement.textContent || tongTienElement.innerText;
+	  // Chuyển đổi giá trị thành số và định dạng thành hàng triệu, hàng trăm triệu, hàng tỷ, chục tỷ
+	  var tongTienNumber = parseFloat(tongTienValue.replace(/\D/g, ''));
+	  var formattedTongTien = formatNumber(tongTienNumber);
+	
+	  // Hiển thị kết quả trong thẻ
+	  tongTienElement.innerHTML = formattedTongTien + ' ₫';
+	});
+	// Lấy tất cả các thẻ có thuộc tính name="tongtien"
+	var giaElements = document.querySelectorAll('[name="gia"]');
+	
+	///giá
+	giaElements.forEach(function(giaElement) {
+	  var giaValue = giaElement.textContent ||giaElement.innerText;
+	  var giaNumber = parseFloat(giaValue.replace(/\D/g, ''));
+	  var formattedgia = formatNumber(giaNumber);
+	  giaElement.innerHTML = formattedgia + ' ₫';
+	});
+	
+	 function formatNumber(number) {
+		    if (number >= 1e11) {
+		      return (number / 1e9).toFixed(3) + ' tỷ';
+		    } else if (number >= 1e10) {
+		      return (number / 1e9).toFixed(3) + ' tỷ';
+		    } else if (number >= 1e9) {
+		      return (number / 1e9).toFixed(3) + ' tỷ';
+		    } else if (number >= 1e8) {
+		      return (number / 1e7).toFixed(3) + ' triệu';
+		    } else if (number >= 1e7) {
+		      return (number / 1e7).toFixed(3) + ' triệu';
+		    } else if (number >= 1e6) {
+		      return (number / 1e4).toFixed(3) + '';
+		    } else if (number >= 1e5) {
+		      return (number / 1e3).toFixed(3) + '';
+		    } else if (number >= 1e3) {
+		      return (number / 1e4).toFixed(3) + '';
+		    } else {
+		      return number.toFixed(2) + '';
+		    }
+	}
+</script>

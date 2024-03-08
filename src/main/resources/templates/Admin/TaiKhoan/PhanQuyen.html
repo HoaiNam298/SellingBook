@@ -1,0 +1,72 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/Admin/Layout/Layout :: dynamic (~{::main})}">
+	<!-- Main Content -->
+	<main id="content" ng-app="appPQ" ng-controller="ctrlPQ">
+
+		<!-- Topbar -->
+		<div th:replace="~{/Admin/Layout/TopBar}"></div>
+		<!-- End of Topbar -->
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+
+			<!-- Page Heading -->
+			<h1 class="h3 mb-2 text-gray-800">Tài khoản</h1>
+
+			<p style="display: none">Giá trị của "TC" là: <span th:text="${message}" id="TB"></span></p>
+			<!-- DataTales Example -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Bảng dữ liệu</h6>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTablePQ" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+
+									<!-- <th>Email</th>
+									<th>Họ Và Tên</th>
+									<th>Ảnh</th>
+									<th>Địa Chỉ</th>
+									<th>Vai Trò</th>
+									<th></th> -->
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<!-- <th>Email</th>
+
+									<th>Họ Và Tên</th>
+									<th>Ảnh</th>
+									<th>Địa Chỉ</th>
+									<th>Vai Trò</th>
+									<th></th> -->
+								</tr>
+							</tfoot>
+							<tbody >
+								<!-- <tr ng-repeat="item in items">
+									<td>{{item.taikhoan.email}}</td>
+									<td>{{item.taikhoan.hovaten}}</td>
+									<td class="text-center"><img ng-src="{{'/assets/products/'+item.taikhoan.anh}}" alt="" width="50px"
+													height="50px"></td>
+									<td>{{item.taikhoan.diachi}}</td>
+									<td>{{item.vaitro.tenvaitro}}</td>
+									<td><a class="text-white bg-danger" ng-click="delete(item)" >Xóa</a></td>
+								</tr> -->
+								<tr></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!--end  -->
+
+
+
+		</div>
+		<!-- /.container-fluid -->
+
+	</main>
+	<!-- End of Main Content -->
+</div>
+<script src="/Admin/js/taikhoan/phanquyen.js"></script>
