@@ -127,7 +127,7 @@ insert into TaiKhoan values
 	('nhattan@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Đoàn Nhât Tân','tan.png',N'333 Lê Văn Sĩ'),
 	('anhkhoa@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Bùi Anh Khoa','khoa.png',N'1072 Lê Đức Thọ'),
 	('toanthang@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Trương Toàn Thắng','thang.png',N'134 Nguyễn Văn Quá'),
-	('anhhao@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Nguyễn Anh Hào','khoa.png',N'1072 Lê Đức Thọ'),
+	('nguyenhoainam29.08.01@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Nguyễn Anh Hào','khoa.png',N'1072 Lê Đức Thọ'),
 	('hoainam@gmail.com','$2a$10$2n/7KPuN4OJtOuE0IKxu2eaJPmRgi8icWNgIJvzK2Ahop7ZbxJSqK',N'Nguyễn Hoài Nam','nam.png',N'1072 Lê Đức Thọ')
 
 
@@ -144,7 +144,7 @@ select * from VaiTro
 
 Insert into PhanQuyen values
 	('nhattan@gmail.com',3),
-	('anhhao@gmail.com',1),
+	('nguyenhoainam29.08.01@gmail.com',1),
 	('anhkhoa@gmail.com',3),
 	('hoainam@gmail.com',2)
 	select * from phanquyen
@@ -157,7 +157,7 @@ select * from PhanQuyen
 Insert into HoaDon values 
 	(CAST('2023-1-1' AS Date),N'123 Lê Đức Thọ','nhattan@gmail.com'),
 	(CAST('2023-2-1' AS Date),N'123 Nguyễn Văn Quá','anhkhoa@gmail.com'),
-	(CAST('2023-3-1' AS Date),N'188 Dương Thị Mười','anhhao@gmail.com'),
+	(CAST('2023-3-1' AS Date),N'188 Dương Thị Mười','nguyenhoainam29.08.01@gmail.com'),
 	(CAST('2023-4-1' AS Date),N'2 Thống Nhất','hoainam@gmail.com'),
 	(CAST('2023-5-1' AS Date),N'3 Đình Quá','toanthang@gmail.com')
 select * from HoaDon
@@ -201,13 +201,13 @@ select * from HoaDonChiTiet
 
 insert into BinhLuan values 
 	('hoainam@gmail.com',1,N'Sách Hay Vãi Ò',3),
-	('anhhao@gmail.com',2,N'Tuyệt',5),
+	('nguyenhoainam29.08.01@gmail.com',2,N'Tuyệt',5),
 	('anhkhoa@gmail.com',3,N'Đọc cũng được',4),
 	('hoainam@gmail.com',4,N'Bình Thường',3),
 	('toanthang@gmail.com',5,N'Tệ',2),
-	('anhhao@gmail.com',6,N'Um',4),
-	('anhhao@gmail.com',7,N'Um',5),
-	('anhhao@gmail.com',8,N'Um',5)
+	('nguyenhoainam29.08.01@gmail.com',6,N'Um',4),
+	('nguyenhoainam29.08.01@gmail.com',7,N'Um',5),
+	('nguyenhoainam29.08.01@gmail.com',8,N'Um',5)
 select * from BinhLuan
 
 insert into MaGiamGia values
