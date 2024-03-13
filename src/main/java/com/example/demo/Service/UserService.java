@@ -44,7 +44,8 @@ public class UserService implements UserDetailsService{
 	        
 	        System.out.println("Username: " + taikhoan.getEmail());
 	        System.out.println("Encoded Password: " + taikhoan.getMatkhau());
-	        System.out.println("Role: " + taikhoan.getVaitro().stream().map(role -> new SimpleGrantedAuthority(role.getTenvaitro())).collect(Collectors.toList()));
+	        System.out.println("Role: " + taikhoan.getVaitro().stream().map(role -> new SimpleGrantedAuthority(role.getTenvaitro()))
+	        		.collect(Collectors.toList()));
 
 	        String[] roles = taikhoan.getVaitro().stream().map(role -> role.getTenvaitro())
 					.collect(Collectors.toList()).toArray(new String[0]);
